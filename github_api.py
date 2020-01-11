@@ -1,6 +1,7 @@
 import requests
 import pprint
 import base64
+import time
 import json
 import re
 
@@ -79,6 +80,7 @@ for item in items:
 
 print('\n****************** опасность SQL инъекции ******************\n')
 
+time.sleep(1)
 search_url = 'search/code'
 request_github = 'q=' \
                  'eval+' \
@@ -122,70 +124,6 @@ for item in items:
         print('Все is OK:)')
 
 
-print('\n****************** используется функция eval ******************\n')
-
-search_url = 'search/code'
-request_github = 'q=' \
-                 'eval+' \
-                 'in:file+' \
-                 'language:python'
-
-url = DOMAIN + search_url + '?' + request_github
-code = session.get(url).status_code
-print(f'status code: {code}')
-
-result = session.get(url).json()
-items = result['items']
-
-for item in items:
-
-    info = {'emails': [],
-            'passwords': [],
-            'file_url': item['html_url'],
-            'error_type': ['используется функция eval', ],
-            'status': ['содержит уязвимость', ]}
-
-    print('Обнаружена уязвимость: используется функция eval! ')
-
-    if not item['repository']['html_url'] in all_info.keys():
-        all_info[item['repository']['html_url']] = info
-    else:
-        all_info[item['repository']['html_url']]['error_type'] = info['error_type']
-        all_info[item['repository']['html_url']]['status'] = info['status']
-
-
-print('\n****************** используется модуль pickle ******************\n')
-
-search_url = 'search/code'
-request_github = 'q=' \
-                 'pickle+' \
-                 'in:file+' \
-                 'language:python'
-
-url = DOMAIN + search_url + '?' + request_github
-code = session.get(url).status_code
-print(f'status code: {code}')
-
-result = session.get(url).json()
-items = result['items']
-
-for item in items:
-
-    info = {'emails': [],
-            'passwords': [],
-            'file_url': item['html_url'],
-            'error_type': ['используется модуль pickle', ],
-            'status': ['содержит уязвимость', ]}
-
-    print('Обнаружена уязвимость:  используется модуль pickle! ')
-
-    if not item['repository']['html_url'] in all_info.keys():
-        all_info[item['repository']['html_url']] = info
-    else:
-        all_info[item['repository']['html_url']]['error_type'] = info['error_type']
-        all_info[item['repository']['html_url']]['status'] = info['status']
-
-
 print('\n****************** локально отключен csrf token ******************\n')
 
 search_url = 'search/code'
@@ -219,9 +157,43 @@ for item in items:
         all_info[item['repository']['html_url']]['status'] = info['status']
 
 
+print('\n****************** используется функция eval ******************\n')
+
+time.sleep(1)
+search_url = 'search/code'
+request_github = 'q=' \
+                 'eval+' \
+                 'in:file+' \
+                 'language:python'
+
+url = DOMAIN + search_url + '?' + request_github
+code = session.get(url).status_code
+print(f'status code: {code}')
+
+result = session.get(url).json()
+items = result['items']
+
+for item in items:
+
+    info = {'emails': [],
+            'passwords': [],
+            'file_url': item['html_url'],
+            'error_type': ['используется функция eval', ],
+            'status': ['содержит уязвимость', ]}
+
+    print('Обнаружена уязвимость: используется функция eval! ')
+
+    if not item['repository']['html_url'] in all_info.keys():
+        all_info[item['repository']['html_url']] = info
+    else:
+        all_info[item['repository']['html_url']]['error_type'] = info['error_type']
+        all_info[item['repository']['html_url']]['status'] = info['status']
+
+
 print('\n****************** отключен csrf token ******************\n')
 # В settings.py в константе MIDDLEWARE_CLASSES  отстутствует или закоменчен 'django.middleware.csrf.CsrfViewMiddleware'
 
+time.sleep(1)
 search_url = 'search/code'
 request_github = 'q=' \
                  'MIDDLEWARE_CLASSES+' \
@@ -261,6 +233,39 @@ for item in items:
 
     elif f.find('django.middleware.csrf.CsrfViewMiddleware') >= 0:
         print('Все в порядке - уязвимости нет!')
+
+
+print('\n****************** используется модуль pickle ******************\n')
+
+time.sleep(1)
+search_url = 'search/code'
+request_github = 'q=' \
+                 'pickle+' \
+                 'in:file+' \
+                 'language:python'
+
+url = DOMAIN + search_url + '?' + request_github
+code = session.get(url).status_code
+print(f'status code: {code}')
+
+result = session.get(url).json()
+items = result['items']
+
+for item in items:
+
+    info = {'emails': [],
+            'passwords': [],
+            'file_url': item['html_url'],
+            'error_type': ['используется модуль pickle', ],
+            'status': ['содержит уязвимость', ]}
+
+    print('Обнаружена уязвимость:  используется модуль pickle! ')
+
+    if not item['repository']['html_url'] in all_info.keys():
+        all_info[item['repository']['html_url']] = info
+    else:
+        all_info[item['repository']['html_url']]['error_type'] = info['error_type']
+        all_info[item['repository']['html_url']]['status'] = info['status']
 
 
 print('\n****************** ИТОГОВЫЙ JSON с ДАННЫМИ ******************\n')
