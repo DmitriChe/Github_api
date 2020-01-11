@@ -2,6 +2,8 @@ import requests
 import pprint
 import base64
 import json
+import re
+
 
 DOMAIN = 'https://api.github.com/'
 
@@ -73,6 +75,51 @@ for item in items:
         if info['emails'] and info['passwords']:
             info['file_url'] = item['html_url']
             all_info[item['repository']['html_url']] = info
+
+
+print('\n****************** опасность SQL инъекции ******************\n')
+
+search_url = 'search/code'
+request_github = 'q=' \
+                 'eval+' \
+                 'in:file+' \
+                 'language:python'
+
+url = DOMAIN + search_url + '?' + request_github
+code = session.get(url).status_code
+print(f'status code: {code}')
+
+result = session.get(url).json()
+items = result['items']
+
+for item in items:
+    file_path = item['url']
+    f = session.get(file_path).json()
+    content = base64.b64decode(f['content']).decode('utf-8')
+
+    check_sql_fstring = re.match(r"\'[(\d)aA-zZ_\{\}\(\)\. ]*(SELECT|FOR|FROM|UPDATE|SET|WHERE|DELETE|DROP|TABLE|CREATE|INSERT|INTO|VALUES)[(\d)aA-zZ_\{\}\(\)\. ]*\'\.format\(", content)
+    check_sql_format = re.match(r"f\'[(\d)aA-zZ_\{\}\(\)\. ]*(SELECT|FOR|FROM|UPDATE|SET|WHERE|DELETE|DROP|TABLE|CREATE|INSERT|INTO|VALUES)[(\d)aA-zZ_\{\}\(\)\. ]*\'", content)
+    print(f'check_sql_fstring = {check_sql_fstring}')
+    print(f'check_sql_format = {check_sql_format}')
+
+    if check_sql_format is not None or check_sql_fstring is not None:
+
+        info = {'emails': [],
+                'passwords': [],
+                'file_url': item['html_url'],
+                'error_type': ['опасность SQL инъекции', ],
+                'status': ['содержит уязвимость', ]}
+
+        print('Обнаружена уязвимость: опасность SQL инъекции! ')
+
+        if not item['repository']['html_url'] in all_info.keys():
+            all_info[item['repository']['html_url']] = info
+        else:
+            all_info[item['repository']['html_url']]['error_type'] = info['error_type']
+            all_info[item['repository']['html_url']]['status'] = info['status']
+
+    else:
+        print('Все is OK:)')
 
 
 print('\n****************** используется функция eval ******************\n')
