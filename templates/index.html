@@ -11,15 +11,15 @@
   <title>Мегапарсер hh.ru</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="css/grayscale.min.css" rel="stylesheet">
+  <link href="/static/css/grayscale.min.css" rel="stylesheet">
 
 </head>
 
@@ -39,7 +39,7 @@
             <a class="nav-link js-scroll-trigger" href="#about">О программе</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#projects">Форма поиска</a>
+            <a class="nav-link js-scroll-trigger" href="#projects">Парсить ICO</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#signup">Результаты</a>
@@ -53,8 +53,8 @@
   <header class="masthead">
     <div class="container d-flex h-100 align-items-center">
       <div class="mx-auto text-center">
-        <h1 class="mx-auto my-0 text-uppercase">MEGAPARSER hh</h1>
-        <h2 class="text-white-50 mx-auto mt-2 mb-5">Бесплатный парсер вакансий с сайта hh.ru!!!</h2>
+        <h1 class="mx-auto my-0 text-uppercase">ICOPARSER</h1>
+        <h2 class="text-white-50 mx-auto mt-2 mb-5">Бесплатный парсер ICO с сайта <a href="https:\\icobench.com">icobench.com</a>!!!</h2>
         <a href="#about" class="btn btn-primary js-scroll-trigger">Подробнее о программе</a>
       </div>
     </div>
@@ -65,12 +65,12 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto">
-          <h2 class="text-white mb-4"><strong>Парсер вакансий на hh.ru</strong></h2>
-          <p class="text-white-50">Данный парсер - это онлайн программа для получения статистики о наиболее часто запрашиваемых работодателем скилах соискателя.
-            <br>Не оставляйте шанса работодателю:<br> <a href="#projects">:: опробовать парсер ::</a></p>
+          <h2 class="text-white mb-4"><strong>Парсер ICO на icobench.com</strong></h2>
+          <p class="text-white-50">Данный парсер - это онлайн программа для получения данных о криптовалютах ICO.
+            <br>Не оставляйте шанса биткоину:<br> <a href="#projects">:: опробовать парсер ::</a></p>
         </div>
       </div>
-      <img src="img/ipad.png" class="img-fluid" alt="">
+      <img src="/static/img/ipad.png" class="img-fluid" alt="">
     </div>
   </section>
 
@@ -81,24 +81,24 @@
       <!-- Featured Project Row -->
       <div class="row align-items-center no-gutters mb-4 mb-lg-5">
         <div class="col-xl-8 col-lg-7">
-          <img class="img-fluid mb-3 mb-lg-0" src="img/bg-masthead.jpg" alt="">
+          <img class="img-fluid mb-3 mb-lg-0" src="/static/img/bg-masthead.jpg" alt="">
         </div>
         <div class="col-xl-4 col-lg-5">
           <div class="featured-text text-center text-lg-left">
-            <h4>ФОРМА ДЛЯ ПОИСКА</h4>
-            <p class="text-black-50 mb-0">Заполните форму и получите всю информацию о наиболее востребованных скилах!</p>
+            <h4>ФОРМА ДЛЯ ICO ПАРСИНГА</h4>
+            <p class="text-black-50 mb-0">Заполните форму и получите данные о криптоволютах ICO!</p>
             <br>
-                <form action="index.html#signup">
-                    <input class="form-control" type="text" name="query_string" value="python" placeholder="строка поиска">
+                <form action="#signup" method="post">
+                    <input class="form-control" type="number" name="num_pages" placeholder="введите число страниц от 1 до {{number_of_pages}}" min="1" max="{{number_of_pages}}">
+<!--                    <br>-->
+<!--                    <select name="where" class="custom-select">-->
+<!--                        <option value="all">Искать везде</option>-->
+<!--                        <option value="company">В названии компании</option>-->
+<!--                        <option value="name">В названи вакансии</option>-->
+<!--                    </select>-->
+<!--                    <br>-->
                     <br>
-                    <select name="where" class="custom-select">
-                        <option value="all">Искать везде</option>
-                        <option value="company">В названии компании</option>
-                        <option value="name">В названи вакансии</option>
-                    </select>
-                    <br>
-                    <br>
-                    <input type="submit" value="Искать" class="btn btn-primary">
+                    <input type="submit" value="Парсить" class="btn btn-primary">
                 </form>
           </div>
         </div>
@@ -107,14 +107,14 @@
       <!-- Project One Row -->
       <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
         <div class="col-lg-6">
-          <img class="img-fluid" src="img/demo-image-01.jpg" alt="">
+          <img class="img-fluid" src="/static/img/demo-image-01.jpg" alt="">
         </div>
         <div class="col-lg-6">
           <div class="bg-black text-center h-100 project">
             <div class="d-flex h-100">
               <div class="project-text w-100 my-auto text-center text-lg-left">
-                <h4 class="text-white">PARSE YOR CAREER</h4>
-                <p class="mb-0 text-white-50">Покори эвересты карьеры с помощью...</p>
+                <h4 class="text-white">PARSE ICOS : MAKE MONEY</h4>
+                <p class="mb-0 text-white-50">Покори эвересты финансовой свободы с ...</p>
                 <hr class="d-none d-lg-block mb-0 ml-0">
               </div>
             </div>
@@ -125,14 +125,14 @@
       <!-- Project Two Row -->
       <div class="row justify-content-center no-gutters">
         <div class="col-lg-6">
-          <img class="img-fluid" src="img/demo-image-02.jpg" alt="">
+          <img class="img-fluid" src="/static/img/demo-image-02.jpg" alt="">
         </div>
         <div class="col-lg-6 order-lg-first">
           <div class="bg-black text-center h-100 project">
             <div class="d-flex h-100">
               <div class="project-text w-100 my-auto text-center text-lg-right">
-                <h4 class="text-white">MEGAPARSER HH</h4>
-                <p class="mb-0 text-white-50">Мегапарсер - альпеншток твоей карьеры!</p>
+                <h4 class="text-white">ICOPARSER</h4>
+                <p class="mb-0 text-white-50">ICOпарсер - твой хомут для золотого тельца!</p>
                 <hr class="d-none d-lg-block mb-0 mr-0">
               </div>
             </div>
@@ -152,23 +152,63 @@
           <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
           <h2 class="text-white mb-5"><strong>РЕЗУЛЬТАТ ОБРАБОТКИ ЗАПРОСА:</strong></h2>
 
+
+          {% if ico_data_dict %}
           <table class="table table-bordered table-dark">
               <tr>
                   <th>Номер</th>
                   <th>Название</th>
                   <th>Описание</th>
+                  <th>Дата начала</th>
+                  <th>Дата окончания</th>
+                  <th>Рейтинг</th>
+                  <th>Ссылка</th>
+              </tr>
+                {% for item in ico_data_dict.values() %}
+                  <tr>
+                      <td>{{item.index}}</td>
+                      <td>{{item.name}}</td>
+                      <td>{{item.description}}</td>
+                      <td>{{item.start_date}}</td>
+                      <td>{{item.end_date}}</td>
+                      <td>{{item.rating}}</td>
+                      <td><a href="{{item.url}}">{{item.url}}</a></td>
+                  </tr>
+                {% endfor %}
+          </table>
+          {% elif one_ico_data %}
+          <table class="table table-bordered table-dark">
+              <tr>
+                  <th>Номер</th>
+                  <th>Название</th>
+                  <th>Описание</th>
+                  <th>Дата начала</th>
+                  <th>Дата окончания</th>
+                  <th>Рейтинг</th>
+                  <th>Ссылка</th>
               </tr>
               <tr>
-                  <td>1</td>
-                  <td>java developer</td>
-                  <td>Надо прогать на java</td>
-              </tr>
-              <tr>
-                  <td>1</td>
-                  <td>python developer</td>
-                  <td>Надо прогать на python</td>
+                  <td>{{one_ico_data.index}}</td>
+                  <td>{{one_ico_data.name}}</td>
+                  <td>{{one_ico_data.description}}</td>
+                  <td>{{one_ico_data.start_date}}</td>
+                  <td>{{one_ico_data.end_date}}</td>
+                  <td>{{one_ico_data.rating}}</td>
+                  <td><a href="{{one_ico_data.url}}">{{one_ico_data.url}}</a></td>
               </tr>
           </table>
+
+          {% else %}
+              <p class="text-white mb-5">Нет данных!</p>
+          {% endif %}
+
+
+
+          {% if one_ico_data %}
+          <p>
+            <a href="/static/ico_data.json">Скачать файл с результатом парсинга</a>
+          </p>
+          {% endif %}
           <br>
           <a href="#page-top" class="btn btn-secondary js-scroll-trigger">На главную</a>
 
@@ -189,7 +229,7 @@
               <i class="fas fa-map-marked-alt text-primary mb-2"></i>
               <h4 class="text-uppercase m-0">Приходи</h4>
               <hr class="my-4">
-              <div class="small text-black-50">пик Эвереста карьеры</div>
+              <div class="small text-black-50">пик златого Эвереста</div>
             </div>
           </div>
         </div>
@@ -201,7 +241,7 @@
               <h4 class="text-uppercase m-0">Пиши</h4>
               <hr class="my-4">
               <div class="small text-black-50">
-                <a href="#">megaparser.hh@hh.hh</a>
+                <a href="#">icoparser@ico.com</a>
               </div>
             </div>
           </div>
@@ -237,19 +277,19 @@
   <!-- Footer -->
   <footer class="bg-black small text-center text-white-50">
     <div class="container">
-      Copyright &copy; Megaparser.hh 2019
+      Copyright &copy; icoparser 2019
     </div>
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/vendor/jquery/jquery.min.js"></script>
+  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Plugin JavaScript -->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for this template -->
-  <script src="js/grayscale.min.js"></script>
+  <script src="/static/js/grayscale.min.js"></script>
 
 </body>
 
