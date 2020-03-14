@@ -6,3 +6,4 @@ urllib3==1.25.7
 bs4
 pprint
 flask
+SQLAlchemy
