@@ -1,4 +1,4 @@
-from functions import parse_icos_to_db, get_number_of_pages, get_data_from_db, make_json
+from functions import parse_icos_to_db, get_number_of_pages, get_db_data_sqlite, make_json, parse_icos_to_db_sqlalchemy, get_db_data_sqlalchemy
 import pprint
 
 from flask import Flask, render_template, request
@@ -22,10 +22,12 @@ def post():
         num = int(request.form['num_pages'])  # сколько страниц нужно спарсить
         print(f'Получен запрос отпарсить первые {num} страниц.')
 
+        db_fname = 'ico_db.sqlite'
+
         # парсим указанное число страниц и сохраняем в БД
-        parse_icos_to_db(num)
+        parse_icos_to_db_sqlalchemy(num, db_fname)
         # читаем данные из БД в виде словаря
-        ico_data_dict = get_data_from_db()
+        ico_data_dict = get_db_data_sqlalchemy(db_fname)
         # формируем json с данными для скачивания данных с нашего сайта
         make_json(ico_data_dict)
         one_ico_data = ico_data_dict[0]
